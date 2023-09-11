@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "portfolio_manager",
-    "authentication"
+    "portfolio_manager"
 ]
 
 MIDDLEWARE = [
