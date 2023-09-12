@@ -39,11 +39,11 @@
                     {% if user.is_authenticated %}
                         <span class="navbar-text">Logged in as {{ user.username }} | </span>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url "logout" %}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link" href="{% url "login" %}">Login</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -60,5 +60,49 @@
         <script 
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
         ></script>
+
+        <!-- Include jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Include jQuery UI -->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+        <!-- Include Select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+        <script>
+            $(function() {
+                $(".datepicker").datepicker({
+                    changeYear: true,
+                    yearRange: "1900:2050",
+                    onSelect: function(dateText, inst) {
+                        $(this).val(dateText);
+                    },
+                    beforeShow: function(input, inst) {
+                        setTimeout(function() {
+                            transformDropdown(input, inst);
+                        }, 0);
+                    },
+                    onChangeMonthYear: function(year, month, inst) {
+                        setTimeout(function() {
+                            transformDropdown(null, inst);
+                        }, 0);
+                    }
+                });
+
+                function transformDropdown(input, inst) {
+                    const $origYearDropdown = $(inst.dpDiv).find('.ui-datepicker-year');
+                    const $clonedYearDropdown = $origYearDropdown.clone();
+                    
+                    $origYearDropdown.next('.select2').remove();  // Remove any previous Select2 container
+                    $origYearDropdown.replaceWith($clonedYearDropdown);  // Replace original with the clone
+                    
+                    $clonedYearDropdown.select2();
+                }
+            });
+           
+        </script>        
     </body>
 </html>

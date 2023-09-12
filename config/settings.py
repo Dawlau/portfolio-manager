@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "portfolio_manager",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_countries",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
